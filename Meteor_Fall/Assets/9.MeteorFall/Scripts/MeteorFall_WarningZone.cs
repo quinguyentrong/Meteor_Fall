@@ -6,7 +6,8 @@ using DG.Tweening;
 public class MeteorFall_WarningZone : MonoBehaviour
 {
     [SerializeField] private CircleCollider2D WarningZoneCircleCollider2D;
-    public GameObject Meteor;
+    [SerializeField] private GameObject Meteor;
+    [SerializeField] private GameObject MeteorShadow;
 
     [SerializeField] private List<Sprite> DestroyMeteorAnimationList = new List<Sprite>();
     [SerializeField] private SpriteRenderer MeteroSpriteRenderer;
@@ -19,6 +20,10 @@ public class MeteorFall_WarningZone : MonoBehaviour
         IndexMeteroSpriterender = 1;
         IsCanRunAnimation = true;
         MeteroSpriteRenderer.sprite = DestroyMeteorAnimationList[0];
+
+        Meteor.transform.localPosition = new Vector3(2, 2, 0);
+        MeteorShadow.transform.localPosition = new Vector3(2, 0, 0);
+        MeteorShadow.transform.localScale = new Vector3(1.75f, 1.75f, 1.75f);
     }
 
     public void ActiveMeteor()
@@ -42,8 +47,11 @@ public class MeteorFall_WarningZone : MonoBehaviour
         yield return new WaitForSeconds(seconds);
 
         Meteor.SetActive(true);
+        MeteorShadow.SetActive(true);
         //Thiên thạch di chuyển về tâm WarningZone trong 0.5s
         Meteor.transform.DOMove(gameObject.transform.position, 0.5f, false).SetEase(Ease.InSine);
+        MeteorShadow.transform.DOMoveX(gameObject.transform.position.x, 0.5f, false).SetEase(Ease.InSine);
+        MeteorShadow.transform.DOScale(1f, 0.5f);
     }
 
     IEnumerator InActiveMeteor(float seconds)
@@ -51,6 +59,7 @@ public class MeteorFall_WarningZone : MonoBehaviour
         yield return new WaitForSeconds(seconds);
 
         Meteor.SetActive(false);
+        MeteorShadow.SetActive(false);
     }
 
     IEnumerator InactiveWarningZone(float seconds)

@@ -24,7 +24,6 @@ public class MeteorFall_SpawnWarningZone : MonoBehaviour
     {
         var warningZone = PoolingSystem.Spawn(WarningZone);
         warningZone.transform.position = new Vector3(Random.Range(-2f, 2f), Random.Range(-4f, 4f), 0);
-        warningZone.Meteor.transform.localPosition = new Vector3(4, 4, 0);
         warningZone.ActiveMeteor();
         warningZone.InactiveWarningZone();
     }
