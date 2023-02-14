@@ -13,10 +13,6 @@ public class MeteorFall_BlueJoyStick : MeteorFall_JoyStick
             MeteorFall_GameManager.Instance.OnJoyStick += OnJoyStick;
             MeteorFall_GameManager.Instance.OnEndGame += OnEndGame;
         }
-        else
-        {
-            Destroy(gameObject);
-        }
     }
 
     private void OnDestroy()

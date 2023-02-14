@@ -4,36 +4,36 @@ using UnityEngine;
 
 public class MeteorFall_Red : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D SelfRigidbody2D;
+    [SerializeField] protected Rigidbody2D SelfRigidbody2D;
 
     [SerializeField] private List<Sprite> MoveRedAnimationList = new List<Sprite>();
-    [SerializeField] private SpriteRenderer RedSpriteRenderer;
+    [SerializeField] private SpriteRenderer SelfSpriteRenderer;
 
-    public MeteorFall_RedJoyStick JoyStick;
-    private float Speed = 3f;
-    private bool IsCanRunAnimation;
+    public MeteorFall_JoyStick JoyStick;
+    protected float Speed = 3f;
+    protected bool IsCanRunAnimation;
     private int IndexRedSpriteRenderer;
     private bool CheckCoroutine;
-    private float RotatioZ;
+    protected float RotatioZ;
 
-    private void Start()
+    protected virtual void Start()
     {
         MeteorFall_GameManager.Instance.OnRedDie += OnRedDie;
         MeteorFall_GameManager.Instance.OnEndGame += OnEndGame;
     }
 
-    private void OnDestroy()
+    protected virtual void OnDestroy()
     {
         MeteorFall_GameManager.Instance.OnRedDie -= OnRedDie;
         MeteorFall_GameManager.Instance.OnEndGame -= OnEndGame;
     }
 
-    private void ResetPosition()
+    protected virtual void ResetPosition()
     {
         transform.position = new Vector3(0, -3.5f, 0);
     }
     
-    private void Update()
+    protected virtual void Update()
     {
         SelfRigidbody2D.velocity = JoyStick.NormalizeJoyStickDragVector * Speed;
 
@@ -47,7 +47,7 @@ public class MeteorFall_Red : MonoBehaviour
             IsCanRunAnimation = true;
             if (CheckCoroutine) return;
 
-            StartCoroutine(MoveRedAnimation(0.1f));
+            StartCoroutine(MoveAnimation(0.1f));
             CheckCoroutine = true;
         }
         else
@@ -57,7 +57,7 @@ public class MeteorFall_Red : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.transform.name.Contains("WarningZone"))
         {
@@ -67,27 +67,27 @@ public class MeteorFall_Red : MonoBehaviour
         }
     }
 
-    private void OnRedDie(bool isRedDie)
+    protected virtual void OnRedDie(bool isRedDie)
     {
         if (isRedDie)
         {
-            StartCoroutine(SpawnRed(1f));
+            StartCoroutine(Spawn(1f));
         }
     }
 
-    IEnumerator SpawnRed(float seconds)
+    protected IEnumerator Spawn(float seconds)
     {
         yield return new WaitForSeconds(seconds);
         ResetPosition();
         Speed = 3f;
     }
 
-    IEnumerator MoveRedAnimation(float seconds)
+    protected IEnumerator MoveAnimation(float seconds)
     {
         while (IsCanRunAnimation)
         {
             yield return new WaitForSeconds(seconds);
-            RedSpriteRenderer.sprite = MoveRedAnimationList[IndexRedSpriteRenderer];
+            SelfSpriteRenderer.sprite = MoveRedAnimationList[IndexRedSpriteRenderer];
             IndexRedSpriteRenderer++;
 
             if (IndexRedSpriteRenderer >= MoveRedAnimationList.Count)
@@ -97,7 +97,7 @@ public class MeteorFall_Red : MonoBehaviour
         }
     }
 
-    private void OnEndGame()
+    protected virtual void OnEndGame()
     {
         Speed = 0;
         StopAllCoroutines();

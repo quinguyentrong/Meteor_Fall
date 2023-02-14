@@ -2533,15 +2533,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3862f7b12db4e09418465cad3ba1560a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Red: {fileID: 1776392632}
   SelfRigidbody2D: {fileID: 1351715243}
-  MoveBlueAnimationList:
+  MoveRedAnimationList:
   - {fileID: 21300000, guid: daea02ef0ec0cc44aa100533ddc004b2, type: 3}
-  - {fileID: 21300000, guid: 26071229152bb984fabb0ce084612fc1, type: 3}
   - {fileID: 21300000, guid: 6ffa46d2ab8988948b88064089261873, type: 3}
   - {fileID: 21300000, guid: 26071229152bb984fabb0ce084612fc1, type: 3}
-  BlueSpriteRenderer: {fileID: 1272727224}
+  - {fileID: 21300000, guid: 6ffa46d2ab8988948b88064089261873, type: 3}
+  SelfSpriteRenderer: {fileID: 1272727224}
   JoyStick: {fileID: 876964533}
+  Red: {fileID: 1776392632}
 --- !u!1 &1399068879
 GameObject:
   m_ObjectHideFlags: 0
@@ -3422,10 +3422,10 @@ MonoBehaviour:
   SelfRigidbody2D: {fileID: 1776392629}
   MoveRedAnimationList:
   - {fileID: 21300000, guid: 06312b318a0420547a9685aded807b7e, type: 3}
-  - {fileID: 21300000, guid: 9d88e4fe709374c4e87a4c08e3bb3d3f, type: 3}
   - {fileID: 21300000, guid: ef02de46013d9db48a950d690b04852c, type: 3}
   - {fileID: 21300000, guid: 9d88e4fe709374c4e87a4c08e3bb3d3f, type: 3}
-  RedSpriteRenderer: {fileID: 865312077}
+  - {fileID: 21300000, guid: ef02de46013d9db48a950d690b04852c, type: 3}
+  SelfSpriteRenderer: {fileID: 865312077}
   JoyStick: {fileID: 876964531}
 --- !u!1 &1803614345
 GameObject:

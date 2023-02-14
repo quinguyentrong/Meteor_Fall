@@ -16,6 +16,7 @@ public class MeteorFall_GameManager: MonoBehaviour
     private int RedScores = 3;
     private int BlueScores = 3;
     private int LoseScores = 0;
+    private bool IsCanSpawnWarningZone;
 
     private void Awake()
     {
@@ -43,7 +44,7 @@ public class MeteorFall_GameManager: MonoBehaviour
 
     private void StartGame()
     {
-        StartCoroutine(StartGameCountdown(3));
+        StartCoroutine(StartGameCountdown(2));
         OnJoyStick();
 
         if (OnBotMove != null)
@@ -64,6 +65,7 @@ public class MeteorFall_GameManager: MonoBehaviour
             BlueScores--;
             OnRedDie(false);
         }
+        IsCanSpawnWarningZone = true;
         StartCoroutine(CheckScoreCoroutine());
     }
 
@@ -91,7 +93,11 @@ public class MeteorFall_GameManager: MonoBehaviour
             OnEndGame();
             yield break;
         }
-        StartCoroutine(StartGameCountdown(2));
+
+        if (IsCanSpawnWarningZone == false) yield break;
+        StartCoroutine(StartGameCountdown(2f));
+        IsCanSpawnWarningZone = false;
+
     }
 
     IEnumerator StartGameCountdown(float seconds)
