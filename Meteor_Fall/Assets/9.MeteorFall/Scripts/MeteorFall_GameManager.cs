@@ -95,8 +95,9 @@ public class MeteorFall_GameManager: MonoBehaviour
         }
 
         if (IsCanSpawnWarningZone == false) yield break;
-        IsCanSpawnWarningZone = false;
         StartCoroutine(StartGameCountdown(2f));
+        IsCanSpawnWarningZone = false;
+
     }
 
     IEnumerator StartGameCountdown(float seconds)
