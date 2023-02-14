@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class MeteorFall_GameManager : MonoBehaviour
+public class MeteorFall_GameManager: MonoBehaviour
 {
     public static MeteorFall_GameManager Instance;
 
@@ -33,8 +33,7 @@ public class MeteorFall_GameManager : MonoBehaviour
     private void Start()
     {
         CustomEventManager.Instance.OnNewGame += StartGame;
-
-        CustomEventManager.Instance.OnSetScore(new Vector2Int(3, 3));
+        CustomEventManager.Instance.OnSetScore(new Vector2Int(RedScores, BlueScores));
     }
 
     private void OnDestroy()
@@ -46,7 +45,11 @@ public class MeteorFall_GameManager : MonoBehaviour
     {
         StartCoroutine(StartGameCountdown(3));
         OnJoyStick();
-        OnBotMove();
+
+        if (OnBotMove != null)
+        {
+            OnBotMove();
+        }
     }
 
     public void SetScore(bool isRedDie)
@@ -61,21 +64,32 @@ public class MeteorFall_GameManager : MonoBehaviour
             BlueScores--;
             OnRedDie(false);
         }
+        StartCoroutine(CheckScoreCoroutine());
+    }
+
+    IEnumerator CheckScoreCoroutine()
+    {
+        yield return new WaitForEndOfFrame();
+        if(RedScores == LoseScores && BlueScores == LoseScores)
+        {
+            RedScores++;
+            BlueScores++;
+            yield break;
+        }
 
         CustomEventManager.Instance.OnSetScore(new Vector2Int(RedScores, BlueScores));
-
         if (RedScores == LoseScores)
         {
             CustomEventManager.Instance.OnGameOver(false);
             OnEndGame();
-            return;
+            yield break;
         }
 
         if (BlueScores == LoseScores)
         {
             CustomEventManager.Instance.OnGameOver(true);
             OnEndGame();
-            return;
+            yield break;
         }
         StartCoroutine(StartGameCountdown(2));
     }

@@ -80,6 +80,7 @@ public class MeteorFall_Blue : MonoBehaviour
 
     IEnumerator MoveBlueAnimation(float seconds)
     {
+        yield return null;
         while (IsCanRunAnimation)
         {
             yield return new WaitForSeconds(seconds);
