@@ -12,7 +12,6 @@ public class MeteorFall_FitBorder : MonoBehaviour
     private void Start()
     {
         Ratio = (float)Screen.width / (float)Screen.height;
-
         LeftBorder.transform.position = new Vector3(-5 * Ratio - 0.5f, 0, 0);
         RightBorder.transform.position = new Vector3(5 * Ratio + 0.5f, 0, 0);
     }

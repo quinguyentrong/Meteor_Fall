@@ -2539,7 +2539,11 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 6ffa46d2ab8988948b88064089261873, type: 3}
   - {fileID: 21300000, guid: 26071229152bb984fabb0ce084612fc1, type: 3}
   - {fileID: 21300000, guid: 6ffa46d2ab8988948b88064089261873, type: 3}
-  SelfSpriteRenderer: {fileID: 1272727224}
+  BodySpriteRenderer: {fileID: 1272727224}
+  HeadSpriteRenderer: {fileID: 1808166227}
+  InitHead: {fileID: 21300000, guid: 1f488e3d03e6e914887433af16ca9cbc, type: 3}
+  InitBody: {fileID: 21300000, guid: 6ffa46d2ab8988948b88064089261873, type: 3}
+  DeadSprite: {fileID: 21300000, guid: 4c19e516a2f0bc44ba4fa981407b60a3, type: 3}
   JoyStick: {fileID: 876964533}
   Red: {fileID: 1776392632}
 --- !u!1 &1399068879
@@ -3425,7 +3429,11 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ef02de46013d9db48a950d690b04852c, type: 3}
   - {fileID: 21300000, guid: 9d88e4fe709374c4e87a4c08e3bb3d3f, type: 3}
   - {fileID: 21300000, guid: ef02de46013d9db48a950d690b04852c, type: 3}
-  SelfSpriteRenderer: {fileID: 865312077}
+  BodySpriteRenderer: {fileID: 865312077}
+  HeadSpriteRenderer: {fileID: 1276350251}
+  InitHead: {fileID: 21300000, guid: 0e2c72350daf4954ab9c0449829fa16f, type: 3}
+  InitBody: {fileID: 21300000, guid: ef02de46013d9db48a950d690b04852c, type: 3}
+  DeadSprite: {fileID: 21300000, guid: 4c19e516a2f0bc44ba4fa981407b60a3, type: 3}
   JoyStick: {fileID: 876964531}
 --- !u!1 &1803614345
 GameObject:

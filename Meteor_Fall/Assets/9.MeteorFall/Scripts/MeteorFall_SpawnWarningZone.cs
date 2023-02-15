@@ -23,7 +23,9 @@ public class MeteorFall_SpawnWarningZone : MonoBehaviour
     private void SpawnGameObject()
     {
         var warningZone = PoolingSystem.Spawn(WarningZone);
-        warningZone.transform.position = new Vector3(Random.Range(-2f, 2f), Random.Range(-4f, 4f), 0);
+
+        warningZone.transform.position = new Vector3(Random.Range(-(float)Screen.width / Screen.height * 5, (float)Screen.width / Screen.height * 5), Random.Range(-5f, 5f), 0);
+
         warningZone.ActiveMeteor();
         warningZone.InactiveWarningZone();
     }
@@ -38,6 +40,7 @@ public class MeteorFall_SpawnWarningZone : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(seconds);
+
             SpawnGameObject();
         }
     }

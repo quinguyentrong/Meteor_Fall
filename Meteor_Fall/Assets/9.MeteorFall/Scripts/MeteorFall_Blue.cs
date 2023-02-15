@@ -40,16 +40,24 @@ public class MeteorFall_Blue : MeteorFall_Red
             if (IsBotCanMove == false) return;
 
             TargetDirection = new Vector2(Red.transform.position.x - transform.position.x, Red.transform.position.y - transform.position.y);
-
             SelfRigidbody2D.velocity = new Vector2(TargetDirection.x, TargetDirection.y).normalized * Speed;
             RotatioZ = Mathf.Atan2(TargetDirection.x, TargetDirection.y) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(0, 0, -RotatioZ);
+
+            if (IsDead)
+            {
+                BodySpriteRenderer.sprite = DeadSprite;
+                HeadSpriteRenderer.sprite = null;
+            }
         }
     }
 
     protected override void ResetPosition()
     {
         transform.position = new Vector3(0, 3.5f, 0);
+        IsCanRunAnimation = true;
+
+        StartCoroutine(MoveAnimation(0.1f));
     }
 
     protected override void OnRedDie(bool isRedDie)
@@ -65,7 +73,10 @@ public class MeteorFall_Blue : MeteorFall_Red
         if (collision.transform.name.Contains("WarningZone"))
         {
             MeteorFall_GameManager.Instance.SetScore(false);
+
             Speed = 0;
+            IsCanRunAnimation = false;
+            IsDead = true;
         }
     }
 
@@ -73,12 +84,14 @@ public class MeteorFall_Blue : MeteorFall_Red
     {
         IsBotCanMove = true;
         IsCanRunAnimation = true;
+
         StartCoroutine(MoveAnimation(0.1f));
     }
 
     protected override void OnEndGame()
     {
         IsBotCanMove = false;
+
         base.OnEndGame();
     }
 }

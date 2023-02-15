@@ -12,10 +12,8 @@ public class MeteorFall_JoyStick : MonoBehaviour
     private float CanvasWidth;
     private float CanvasRatio;
     private float CanvasHeight;
-
     private bool IsTouching = false;
     private bool IsCanUseJoyStick = false;
-
     private Vector2 CurrentTouchPos;
     private Vector2 IntialTouchPos = Vector2.zero;
 
@@ -26,7 +24,6 @@ public class MeteorFall_JoyStick : MonoBehaviour
         CanvasRatio = CanvasWidth / Screen.width;
         CanvasHeight = Screen.height * CanvasRatio;
     }
-    
 
     private void Update()
     {
@@ -36,7 +33,6 @@ public class MeteorFall_JoyStick : MonoBehaviour
         {
             if (CheckValidPosition() == false) return;
             
-
             JoyStick.SetActive(true);
 
             IsTouching = true;
@@ -48,7 +44,6 @@ public class MeteorFall_JoyStick : MonoBehaviour
 
             SetJoyStickPos(IntialTouchPos);
         }
-
         if (Input.GetMouseButton(0))
         {
             if (IsTouching)
@@ -59,7 +54,6 @@ public class MeteorFall_JoyStick : MonoBehaviour
                 SetJoyStickState(IntialTouchPos, CurrentTouchPos);
             }
         }
-
         if (Input.GetMouseButtonUp(0))
         {
             IsTouching = false;
@@ -84,10 +78,12 @@ public class MeteorFall_JoyStick : MonoBehaviour
     private void SetJoyStickState(Vector2 initTouchPos, Vector2 currentTouchPos)
     {
         NormalizeJoyStickDragVector = (currentTouchPos - initTouchPos).normalized;
+
         if (Vector2.SqrMagnitude(initTouchPos - currentTouchPos) > 18 * 18)
         {
             JoyStickCenter.anchoredPosition = NormalizeJoyStickDragVector * 18;
         }
+
         else
         {
             JoyStickCenter.anchoredPosition = currentTouchPos - initTouchPos;
@@ -108,6 +104,7 @@ public class MeteorFall_JoyStick : MonoBehaviour
     protected void OnEndGame()
     {
         IsCanUseJoyStick = false;
+
         JoyStick.SetActive(false);
     }
 }

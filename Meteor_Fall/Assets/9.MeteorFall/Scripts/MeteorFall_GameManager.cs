@@ -35,6 +35,8 @@ public class MeteorFall_GameManager: MonoBehaviour
     {
         CustomEventManager.Instance.OnNewGame += StartGame;
         CustomEventManager.Instance.OnSetScore(new Vector2Int(RedScores, BlueScores));
+
+        Application.targetFrameRate = 60;
     }
 
     private void OnDestroy()
@@ -60,18 +62,22 @@ public class MeteorFall_GameManager: MonoBehaviour
             RedScores--;
             OnRedDie(true);
         }
+
         else
         {
             BlueScores--;
             OnRedDie(false);
         }
+
         IsCanSpawnWarningZone = true;
+
         StartCoroutine(CheckScoreCoroutine());
     }
 
     IEnumerator CheckScoreCoroutine()
     {
         yield return new WaitForEndOfFrame();
+
         if(RedScores == LoseScores && BlueScores == LoseScores)
         {
             RedScores++;
@@ -80,6 +86,7 @@ public class MeteorFall_GameManager: MonoBehaviour
         }
 
         CustomEventManager.Instance.OnSetScore(new Vector2Int(RedScores, BlueScores));
+
         if (RedScores == LoseScores)
         {
             CustomEventManager.Instance.OnGameOver(false);
@@ -94,15 +101,18 @@ public class MeteorFall_GameManager: MonoBehaviour
             yield break;
         }
 
-        if (IsCanSpawnWarningZone == false) yield break;
-        IsCanSpawnWarningZone = false;
-        StartCoroutine(StartGameCountdown(2f));
+        if (IsCanSpawnWarningZone == true)
+        {
+            IsCanSpawnWarningZone = false;
 
+            StartCoroutine(StartGameCountdown(2f));
+        }
     }
 
     IEnumerator StartGameCountdown(float seconds)
     {
         yield return new WaitForSeconds(seconds);
+
         OnSpawnWarningZone();
     }
 }
