@@ -37,18 +37,18 @@ public class MeteorFall_Blue : MeteorFall_Red
         }
         else
         {
+            if (IsDead)
+            {
+                BodySpriteRenderer.sprite = DeadSprite;
+                HeadSpriteRenderer.sprite = null;
+            }
+
             if (IsBotCanMove == false) return;
 
             TargetDirection = new Vector2(Red.transform.position.x - transform.position.x, Red.transform.position.y - transform.position.y);
             SelfRigidbody2D.velocity = new Vector2(TargetDirection.x, TargetDirection.y).normalized * Speed;
             RotatioZ = Mathf.Atan2(TargetDirection.x, TargetDirection.y) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(0, 0, -RotatioZ);
-
-            if (IsDead)
-            {
-                BodySpriteRenderer.sprite = DeadSprite;
-                HeadSpriteRenderer.sprite = null;
-            }
         }
     }
 
