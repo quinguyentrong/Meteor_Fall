@@ -8,7 +8,7 @@ public class MeteorFall_BlueJoyStick : MeteorFall_JoyStick
     {
         base.Start();
 
-        if (GameConfig.IsPvPMode)
+        if (GameConfig.IsPVPMode)
         {
             MeteorFall_GameManager.Instance.OnJoyStick += OnJoyStick;
             MeteorFall_GameManager.Instance.OnEndGame += OnEndGame;
@@ -17,7 +17,7 @@ public class MeteorFall_BlueJoyStick : MeteorFall_JoyStick
 
     private void OnDestroy()
     {
-        if (GameConfig.IsPvPMode)
+        if (GameConfig.IsPVPMode)
         {
             MeteorFall_GameManager.Instance.OnJoyStick -= OnJoyStick;
             MeteorFall_GameManager.Instance.OnEndGame -= OnEndGame;

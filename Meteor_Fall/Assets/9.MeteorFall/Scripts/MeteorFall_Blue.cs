@@ -11,7 +11,7 @@ public class MeteorFall_Blue : MeteorFall_Red
 
     protected override void Start()
     {
-        if (GameConfig.IsPvPMode == false)
+        if (GameConfig.IsPVPMode == false)
         {
             MeteorFall_GameManager.Instance.OnBotMove += StartGame;
         }
@@ -21,7 +21,7 @@ public class MeteorFall_Blue : MeteorFall_Red
 
     protected override void OnDestroy()
     {
-        if (GameConfig.IsPvPMode == false)
+        if (GameConfig.IsPVPMode == false)
         {
             MeteorFall_GameManager.Instance.OnBotMove -= StartGame;
         }
@@ -31,7 +31,7 @@ public class MeteorFall_Blue : MeteorFall_Red
 
     protected override void Update()
     {
-        if (GameConfig.IsPvPMode)
+        if (GameConfig.IsPVPMode)
         {
             base.Update();
         }
@@ -55,9 +55,14 @@ public class MeteorFall_Blue : MeteorFall_Red
     protected override void ResetPosition()
     {
         transform.position = new Vector3(0, 3.5f, 0);
-        IsCanRunAnimation = true;
+        transform.localEulerAngles = new Vector3(0, 0, 180f);
 
-        StartCoroutine(MoveAnimation(0.1f));
+        if (GameConfig.IsPVPMode == false)
+        {
+            IsCanRunAnimation = true;
+
+            StartCoroutine(MoveAnimation(0.1f));
+        }
     }
 
     protected override void OnRedDie(bool isRedDie)
@@ -90,7 +95,10 @@ public class MeteorFall_Blue : MeteorFall_Red
 
     protected override void OnEndGame()
     {
-        IsBotCanMove = false;
+        if (GameConfig.IsPVPMode == false)
+        {
+            IsBotCanMove = false;
+        }
 
         base.OnEndGame();
     }

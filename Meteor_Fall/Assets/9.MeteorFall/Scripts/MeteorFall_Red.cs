@@ -35,6 +35,7 @@ public class MeteorFall_Red : MonoBehaviour
     protected virtual void ResetPosition()
     {
         transform.position = new Vector3(0, -3.5f, 0);
+        transform.localEulerAngles = new Vector3(0, 0, 0);
     }
     
     protected virtual void Update()
